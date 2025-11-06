@@ -47,9 +47,10 @@ async function run(){
 
         app.post('/jwt', (req,res) => {
             const user = req.body;
-            console.log(user);  
-            const token = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET,{expiresIn : '10  h'})
-            res.send({token});
+            console.log(user);
+            // fixed expiry format (no extra spaces)
+            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10h' });
+            res.send({ token });
         })
 
         app.get('/services',async (req,res) => {
@@ -130,3 +131,11 @@ app.get('/',(req,res) => {
 
 
 module.exports = app;
+
+// If this file is run directly (node index.js), start the server.
+// When used as a module (e.g. serverless wrapper), this will not run.
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Genius Car server running on port ${port}`);
+    });
+}
