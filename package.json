@@ -2,7 +2,7 @@
   "name": "genius-car-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "api/server.js",
   "scripts": {
     "build": "[my-framework] build --output public",
     "start": "node api/server.js",
